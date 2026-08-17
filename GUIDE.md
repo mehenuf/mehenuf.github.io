@@ -706,18 +706,34 @@ Once it's live, this is the loop for every future change:
    ```bash
    python3 build_projects.py
    ```
-3. **Preview locally** (Part 7):
+3. **If you edited `assets/css/style.css` or `assets/js/main.js` directly** —
+   bump the cache-busting number. Every HTML file loads them as
+   `style.css?v=2` and `main.js?v=2`; browsers (and GitHub's CDN) cache
+   files aggressively, so without changing that number a visitor's browser
+   can keep showing the *old* CSS or JS even after you've pushed new ones —
+   this is exactly what happened once already. Find-and-replace `?v=2` with
+   `?v=3` (then `?v=4` next time, and so on) across `index.html` and inside
+   the `SHELL` template near the top of `build_projects.py`, then
+   regenerate:
+   ```bash
+   python3 build_projects.py
+   ```
+   You only need to do this for CSS/JS edits — editing HTML content alone
+   doesn't need a version bump.
+4. **Preview locally** (Part 7):
    ```bash
    python3 -m http.server 8000
    ```
-4. **Commit and push:**
+5. **Commit and push:**
    ```bash
    git add .
    git commit -m "Describe what changed"
    git push
    ```
-5. **Done.** The site redeploys automatically within about a minute — no
-   further steps, nothing to click on GitHub.
+6. **Done.** The site redeploys automatically within about a minute. Hard
+   refresh (Ctrl/Cmd+Shift+R) when you check it live — even with the
+   version bump, your *own* browser may still hand you a cached copy of the
+   page itself for a few seconds after deploy.
 
 ---
 
