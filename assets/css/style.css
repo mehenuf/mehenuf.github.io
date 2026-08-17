@@ -189,7 +189,7 @@ section + section{ border-top:1px solid var(--line); }
    ============================================================ */
 html.js .reveal{
   opacity:0;
-  transform:translateY(14px);
+  transform:translateY(14px) scale(0.98);
 }
 html.js .reveal.in{
   opacity:1;
@@ -570,6 +570,7 @@ html.js .reveal-img.in figcaption{ opacity:1; transition:opacity 320ms var(--eas
   transition:transform var(--dur-ui) var(--ease-out), box-shadow var(--dur-ui) var(--ease-out), border-color var(--dur-ui) ease;
 }
 .core-item .tile i{ font-size:25px; }
+.core-item .tile img{ width:25px; height:25px; object-fit:contain; }
 .core-item span{ font-size:11.5px; color:var(--ink-soft); font-weight:500; line-height:1.3; }
 @media (hover: hover) and (pointer: fine){
   .core-item:hover .tile{ transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:var(--violet); }
@@ -619,6 +620,8 @@ html.js .reveal-img.in figcaption{ opacity:1; transition:opacity 320ms var(--eas
   transition:border-color var(--dur-hover) ease, color var(--dur-hover) ease, transform var(--dur-hover) var(--ease-out);
 }
 .chip i{ font-size:14px; color:var(--ink-faint); }
+.chip img{ width:14px; height:14px; object-fit:contain; flex:none; display:block; }
+[data-theme="dark"] .chip img.invert-dark{ filter:invert(1) brightness(1.7); }
 @media (hover: hover) and (pointer: fine){
   .chip:hover{ border-color:var(--violet); color:var(--ink); transform:translateY(-1px); }
 }
@@ -630,11 +633,12 @@ html.js .reveal-img.in figcaption{ opacity:1; transition:opacity 320ms var(--eas
 .proj-card{
   background:var(--panel); border:1px solid var(--line); border-radius:var(--radius-lg);
   overflow:hidden; display:flex; flex-direction:column;
-  transition:transform var(--dur-ui) var(--ease-out), box-shadow var(--dur-ui) var(--ease-out);
+  transition:box-shadow var(--dur-ui) var(--ease-out);
+  will-change:transform;
 }
 .proj-card:active{ transform:scale(0.99); }
 @media (hover: hover) and (pointer: fine){
-  .proj-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+  .proj-card:hover{ box-shadow:var(--shadow-lg); }
   .proj-card:hover .proj-media .glyph{ transform:scale(1.06); }
   .proj-card:hover .proj-link{ gap:10px; color:var(--violet-deep); }
 }

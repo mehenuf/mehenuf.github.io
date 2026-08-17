@@ -103,14 +103,18 @@ document.addEventListener('DOMContentLoaded', function () {
     /* Safety net. A reveal hides real content, so if anything is still
        hidden while sitting inside the viewport — a late-loading image
        resizing the page, a restored scroll position, a stalled observer —
-       show it rather than leaving the reader with a blank band. */
+       show it rather than leaving the reader with a blank band.
+       Deliberately NOT tied to the window 'load' event: that waits for
+       every image on the page, so one large or slow-loading asset would
+       delay the whole safety net right along with it. These timers run
+       from script execution instead, independent of asset weight. */
     var sweep = function () {
       document.querySelectorAll('.reveal:not(.in), .reveal-img:not(.in)').forEach(function (el) {
         var r = el.getBoundingClientRect();
         if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
       });
     };
-    window.addEventListener('load', function () { setTimeout(sweep, 400); });
+    setTimeout(sweep, 600);
     setTimeout(sweep, 2500);
   } else {
     revealEls.forEach(function (el) { el.classList.add('in'); });
@@ -189,6 +193,52 @@ document.addEventListener('DOMContentLoaded', function () {
     var count = card.querySelectorAll('.chip-row .chip').length;
     if (badge && count) badge.textContent = count;
   });
+
+  /* ---------- Magnetic tilt (project cards) ----------
+     A small, cursor-tracked 3D tilt — the "modern portfolio" card feel,
+     kept subtle (6° max) so it reads as fluid rather than gimmicky.
+     No CSS transition while the pointer is moving (direct 1:1 tracking
+     is what makes it feel physically connected to the cursor); a
+     transition is added only for the return-to-neutral on mouseleave.
+     rAF-throttled, hover-gated, and skipped entirely under reduced motion —
+     a cursor-driven rotation is exactly the kind of motion that spec
+     exists to opt out of. */
+  var tiltEls = document.querySelectorAll('.proj-card');
+  if (tiltEls.length && !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var TILT_MAX = 6;
+    var cssVar = function (name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); };
+    var RESET_EASE = 'transform 500ms ' + cssVar('--ease-out') + ', box-shadow ' + cssVar('--dur-ui') + ' ' + cssVar('--ease-out');
+
+    tiltEls.forEach(function (card) {
+      var raf = null, pressed = false, lastX = 0.5, lastY = 0.5;
+
+      var paint = function () {
+        var rotY = (lastX - 0.5) * (TILT_MAX * 2);
+        var rotX = (0.5 - lastY) * (TILT_MAX * 2);
+        var scale = pressed ? 1.0 : 1.012;
+        card.style.transition = 'none';
+        card.style.transform =
+          'perspective(900px) rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg) ' +
+          'translateY(-4px) scale(' + scale + ')';
+        raf = null;
+      };
+
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        lastX = (e.clientX - r.left) / r.width;
+        lastY = (e.clientY - r.top) / r.height;
+        if (!raf) raf = requestAnimationFrame(paint);
+      });
+      card.addEventListener('mousedown', function () { pressed = true; if (!raf) raf = requestAnimationFrame(paint); });
+      card.addEventListener('mouseup', function () { pressed = false; if (!raf) raf = requestAnimationFrame(paint); });
+      card.addEventListener('mouseleave', function () {
+        pressed = false;
+        if (raf) { cancelAnimationFrame(raf); raf = null; }
+        card.style.transition = RESET_EASE;
+        card.style.transform = 'none';
+      });
+    });
+  }
 
   /* ---------- Spotlight glow (skills + leadership cards) ----------
      A soft radial highlight that tracks the pointer — restrained to two
