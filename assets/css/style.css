@@ -190,13 +190,13 @@ section + section{ border-top:1px solid var(--line); }
 html.js .reveal{
   opacity:0;
   transform:translateY(14px) scale(0.98);
+  transition:
+    opacity   var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
 }
 html.js .reveal.in{
   opacity:1;
   transform:none;
-  transition:
-    opacity   var(--dur-reveal) var(--ease-out),
-    transform var(--dur-reveal) var(--ease-out);
 }
 
 /* Images reveal with a clip-path wipe instead of a slide — a screenshot has a
