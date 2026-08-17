@@ -83,17 +83,79 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  /* ---------- Calibration readout (the authored focal moment) ----------
+     Genuinely numeric .fact values count up from zero like a measurement
+     settling on a reading, instead of appearing as static text — the
+     literal metaphor behind the "Calibration" design system (see
+     DESIGN.md). Only fires on values that actually read as a measurement
+     (a leading digit, or one preceded by $/≈/>/</~); qualitative facts
+     ("Open to work", "Real-time") are left alone. Runs once, timed to the
+     same moment the surrounding .fact tile fades in, and is skipped
+     entirely under reduced motion — the real value is already correct
+     in the DOM, so skipping loses nothing. */
+  var CAL_PREFIX_OK = ['$', '≈', '>', '<', '~'];
+  var calFmt = function (c, value) {
+    var v = Math.abs(value).toFixed(c.decimals);
+    return c.prefix + (c.negative ? c.glyph : '') + v + c.suffix;
+  };
+  var startCalibration = function (c) {
+    if (reduceMotion || c.started) return;
+    c.started = true;
+    var start = null, dur = 900;
+    var step = function (ts) {
+      if (!start) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      c.node.data = calFmt(c, c.target * eased);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  document.querySelectorAll('.fact .k').forEach(function (el) {
+    var node = null;
+    for (var i = 0; i < el.childNodes.length; i++) {
+      if (el.childNodes[i].nodeType === 3 && el.childNodes[i].data && el.childNodes[i].data.trim()) { node = el.childNodes[i]; break; }
+    }
+    if (!node) return;
+    var text = node.data;
+    var m = /[-−]?\d[\d.]*/.exec(text);
+    if (!m) return;
+    var prevChar = m.index > 0 ? text.charAt(m.index - 1) : '';
+    if (m.index !== 0 && CAL_PREFIX_OK.indexOf(prevChar) === -1) return;
+    var raw = m[0];
+    var negative = raw.charAt(0) === '-' || raw.charAt(0) === '−';
+    var glyph = raw.charAt(0) === '−' ? '−' : '-';
+    var numPart = negative ? raw.slice(1) : raw;
+    var num = parseFloat(numPart);
+    if (!isFinite(num) || num === 0) return;
+    el.__cal = {
+      node: node,
+      prefix: text.slice(0, m.index),
+      suffix: text.slice(m.index + raw.length),
+      target: negative ? -num : num,
+      decimals: numPart.indexOf('.') > -1 ? numPart.split('.')[1].length : 0,
+      negative: negative,
+      glyph: glyph,
+      started: false
+    };
+  });
+
   /* ---------- Scroll reveal (fires once) ---------- */
   var revealEls = document.querySelectorAll('.reveal, .reveal-img');
   if ('IntersectionObserver' in window && revealEls.length) {
+    var activate = function (el) {
+      el.classList.add('in');
+      var kEl = el.classList.contains('fact') ? el.querySelector('.k') : null;
+      if (kEl && kEl.__cal) startCalibration(kEl.__cal);
+    };
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         var delay = Number(entry.target.dataset.delay || 0);
         if (delay) {
-          setTimeout(function () { entry.target.classList.add('in'); }, delay);
+          setTimeout(function () { activate(entry.target); }, delay);
         } else {
-          entry.target.classList.add('in');
+          activate(entry.target);
         }
         io.unobserve(entry.target);
       });
@@ -111,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var sweep = function () {
       document.querySelectorAll('.reveal:not(.in), .reveal-img:not(.in)').forEach(function (el) {
         var r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
+        if (r.top < window.innerHeight && r.bottom > 0) activate(el);
       });
     };
     setTimeout(sweep, 600);

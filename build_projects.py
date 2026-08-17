@@ -76,14 +76,16 @@ SHELL = """<!DOCTYPE html>
 <main>
   <section class="p-hero">
     <div class="wrap">
-      <a class="p-back reveal" href="../index.html#work">{arrow_l}Back to projects</a>
-      <div class="kicker reveal">{eyebrow}</div>
-      <h1 class="reveal">{headline}</h1>
-      <p class="sub reveal">{sub}</p>
-      <div class="p-tags reveal">{tags}</div>
-      <div class="p-cta-row reveal">
-        {primary_cta}
-        {extra_cta}
+      <div data-stagger>
+        <a class="p-back" href="../index.html#work">{arrow_l}Back to projects</a>
+        <div class="kicker">{eyebrow}</div>
+        <h1>{headline}</h1>
+        <p class="sub">{sub}</p>
+        <div class="p-tags">{tags}</div>
+        <div class="p-cta-row">
+          {primary_cta}
+          {extra_cta}
+        </div>
       </div>
       <div class="facts" data-stagger style="margin-top:44px;">{facts}</div>
     </div>

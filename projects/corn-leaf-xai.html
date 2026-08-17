@@ -50,14 +50,16 @@
 <main>
   <section class="p-hero">
     <div class="wrap">
-      <a class="p-back reveal" href="../index.html#work"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to projects</a>
-      <div class="kicker reveal">Pattern Recognition & Neural Networks · Jun – Aug 2025</div>
-      <h1 class="reveal">A 97% model is useless on a phone in a field. So I taught a small one to think like it.</h1>
-      <p class="sub reveal">A dual-branch, lesion-aware Inception teacher guided by U-Net mask proposals, distilled into a MobileNetV3 student and quantized to INT8 — with Grad-CAM used to confirm it looks at the disease, not the background.</p>
-      <div class="p-tags reveal"><span>Grad-CAM</span><span>Knowledge Distillation</span><span>U-Net</span><span>MobileNetV3</span><span>DeiT</span><span>QAT / INT8</span><span>PyTorch</span></div>
-      <div class="p-cta-row reveal">
-        <a class="btn btn-primary" href="https://github.com/mehenuf/corn-leaf-classification" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.1.68-.22.68-.5 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.19-3.37-1.19-.46-1.2-1.11-1.53-1.11-1.53-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.79-4.58 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .28.18.61.69.5A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>View source on GitHub</a>
-        <a class="btn btn-ghost" href="../index.html#contact">Ask me about this</a>
+      <div data-stagger>
+        <a class="p-back" href="../index.html#work"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to projects</a>
+        <div class="kicker">Pattern Recognition & Neural Networks · Jun – Aug 2025</div>
+        <h1>A 97% model is useless on a phone in a field. So I taught a small one to think like it.</h1>
+        <p class="sub">A dual-branch, lesion-aware Inception teacher guided by U-Net mask proposals, distilled into a MobileNetV3 student and quantized to INT8 — with Grad-CAM used to confirm it looks at the disease, not the background.</p>
+        <div class="p-tags"><span>Grad-CAM</span><span>Knowledge Distillation</span><span>U-Net</span><span>MobileNetV3</span><span>DeiT</span><span>QAT / INT8</span><span>PyTorch</span></div>
+        <div class="p-cta-row">
+          <a class="btn btn-primary" href="https://github.com/mehenuf/corn-leaf-classification" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.1.68-.22.68-.5 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.19-3.37-1.19-.46-1.2-1.11-1.53-1.11-1.53-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.79-4.58 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .28.18.61.69.5A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>View source on GitHub</a>
+          <a class="btn btn-ghost" href="../index.html#contact">Ask me about this</a>
+        </div>
       </div>
       <div class="facts" data-stagger style="margin-top:44px;"><div class="fact"><div class="k">97.12<span class='u'>%</span></div><div class="v">Teacher accuracy — lesion-aware Inception V3</div></div><div class="fact"><div class="k">15.5<span class='u'>ms</span></div><div class="v">Student inference on CPU, 299×299, after INT8 QAT</div></div><div class="fact"><div class="k">0.966</div><div class="v">Student F1 — statistically level with the teacher's 0.970</div></div><div class="fact"><div class="k">4 classes</div><div class="v">Common rust, leaf blight, gray spot, healthy</div></div></div>
     </div>
