@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XAI-Driven Corn Leaf Disease Classification — Case Study | Mehenuf Hossain Bhuiyan</title>
+<meta name="description" content="A lesion-aware multi-teacher knowledge distillation pipeline for corn leaf disease, compressed to an edge-ready MobileNetV3 student and verified with Grad-CAM.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B1220'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' fill='%23fff' text-anchor='middle'%3EMB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="../index.html#top" class="nav-brand"><span class="mark">MB</span> Mehenuf</a>
+    <ul class="nav-links" data-nav-links>
+      <li><a href="../index.html#timeline">Timeline</a></li>
+      <li><a href="../index.html#skills">Skills</a></li>
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../index.html#research">Research</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6" stroke-linecap="round"/></svg>
+      </button>
+      <button class="nav-toggle" data-nav-toggle aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="pd-hero">
+    <div class="wrap">
+      <span class="eyebrow reveal in"><span class="dot"></span>Case study — explainable AI &amp; medical-adjacent imaging</span>
+      <h1>A model that points at the lesion, not just the leaf.</h1>
+      <p class="sub">Early diagnosis of corn leaf disease protects crop yield, but a farmer's phone can't run a heavy vision transformer in the field. This project distills a lesion-aware teacher into a MobileNetV3 student small enough for edge inference — and Grad-CAM confirms it's actually looking at the diseased tissue, not the background.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/mehenuf/corn-leaf-classification" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.1.68-.22.68-.5 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.19-3.37-1.19-.46-1.2-1.11-1.53-1.11-1.53-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.79-4.58 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .28.18.61.69.5A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>
+          View source on GitHub
+        </a>
+        <a class="btn btn-ghost" href="#architecture">See the architecture</a>
+      </div>
+
+      <div class="stats reveal" style="margin-bottom:52px;">
+        <div class="stat">
+          <div class="num">97.12<span class="unit">%</span></div>
+          <div class="label">Teacher accuracy — lesion-aware Inception V3</div>
+          <div class="meter"><span style="width:97%"></span></div>
+        </div>
+        <div class="stat">
+          <div class="num">15.5<span class="unit">ms</span></div>
+          <div class="label">CPU latency — INT8-quantized MobileNetV3 student</div>
+          <div class="meter"><span style="width:92%"></span></div>
+        </div>
+        <div class="stat">
+          <div class="num">100<span class="unit">%</span></div>
+          <div class="label">Precision at ~71% coverage under abstention</div>
+          <div class="meter"><span style="width:100%"></span></div>
+        </div>
+        <div class="stat">
+          <div class="num">0.033</div>
+          <div class="label">ECE after temperature scaling — down from ~0.50</div>
+          <div class="meter warn"><span style="width:93%"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pd-section">
+    <div class="wrap">
+      <div class="kicker">The problem</div>
+      <h2>Accuracy alone isn't enough for a diagnostic tool.</h2>
+      <p class="lede">A classifier can be accurate for the wrong reasons — keying off background soil color instead of the lesion itself. And a 97%-accurate teacher model is useless if it can't run on the low-power hardware available in the field. The project had to solve interpretability, compression, and calibration together.</p>
+
+      <div class="finding">
+        <span class="num">01</span>
+        <div>
+          <h3>Lesion-Aware Inception Classifier (LAIC)</h3>
+          <p>A dual-branch teacher: one branch reads the raw image, the other reads a U-Net-masked version with the background attenuated — forcing the network to weight pathology over context.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="num">02</span>
+        <div>
+          <h3>Multi-teacher knowledge distillation</h3>
+          <p>LAIC (Inception V3 + U-Net) and a DeiT-Small transformer both teach a MobileNetV3 student, combining logit distillation, attention transfer, and GAP feature matching into one compact model.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="num">03</span>
+        <div>
+          <h3>Quantization-aware training to INT8</h3>
+          <p>The student is trained with quantization in the loop, not applied after the fact — preserving accuracy while cutting CPU inference latency to ~15.5–17ms on a 299×299 image.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="num">04</span>
+        <div>
+          <h3>Grad-CAM verification + selective abstention</h3>
+          <p>Grad-CAM confirms the model's highest activations land on diseased tissue. Temperature scaling and selective prediction let the model abstain on uncertain cases instead of guessing — reaching 100% precision at ~71% coverage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pd-section" id="architecture">
+    <div class="wrap">
+      <div class="kicker">Architecture</div>
+      <h2>Teacher ensemble in, edge-ready student out.</h2>
+      <p class="lede">Four classes: Common Rust, Corn Leaf Blight, Gray Spot, and Healthy — sourced from the Roboflow Universe corn leaf disease dataset.</p>
+
+      <div class="pipeline">
+        <div class="pipe-step"><div class="n">1</div><div class="t">Raw + masked branches</div><div class="d">U-Net lesion mask</div></div>
+        <div class="pipe-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="pipe-step"><div class="n">2</div><div class="t">LAIC teacher</div><div class="d">Inception V3, 97.12% acc</div></div>
+        <div class="pipe-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="pipe-step"><div class="n">3</div><div class="t">+ DeiT-Small</div><div class="d">Second teacher, 96.18%</div></div>
+        <div class="pipe-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="pipe-step"><div class="n">4</div><div class="t">Multi-teacher KD</div><div class="d">Logit + attention transfer</div></div>
+        <div class="pipe-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="pipe-step"><div class="n">5</div><div class="t">MobileNetV3 student</div><div class="d">INT8 QAT, 15.5ms CPU</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pd-section">
+    <div class="wrap">
+      <div class="kicker">Model comparison</div>
+      <h2>Heavier isn't always better once latency is on the table.</h2>
+
+      <div class="table-wrap" style="margin-top:8px;">
+        <table class="data-table">
+          <thead><tr><th>Variant</th><th class="num">F1</th><th class="num">Accuracy</th><th class="num">CPU latency</th></tr></thead>
+          <tbody>
+            <tr><td>Inception V3 teacher (FP32)</td><td class="num">0.970</td><td class="num">97.12%</td><td class="num">~40.1s / epoch</td></tr>
+            <tr><td>MobileNetV3 student (FP32)</td><td class="num">0.966</td><td class="num">97.12%</td><td class="num">18.2ms</td></tr>
+            <tr><td>MobileNetV3 student — INT8 QAT</td><td class="num">0.966</td><td class="num">95.9%</td><td class="num">15.5ms</td></tr>
+            <tr><td>Multi-teacher KD (LAIC + DeiT)</td><td class="num">0.951</td><td class="num">96.16%</td><td class="num">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="lede" style="margin-top:20px;">Transformer baselines were also evaluated for reference: DeiT reached 96.18% accuracy, ResNet101 95.23%, and ViT 93.32% — none of them practical to run on the target hardware without the distillation step.</p>
+    </div>
+  </section>
+
+  <section class="pd-section">
+    <div class="wrap">
+      <div class="kicker">Built with</div>
+      <h2>Vision + explainability stack.</h2>
+      <div class="built-with">
+        <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">TorchVision</span>
+        <span class="tag">OpenCV</span><span class="tag">ONNX</span><span class="tag">scikit-learn</span>
+        <span class="tag">Roboflow</span><span class="tag">Grad-CAM</span><span class="tag">Jupyter</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="pd-footer">
+    <div class="wrap">
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/mehenuf/corn-leaf-classification" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.1.68-.22.68-.5 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.19-3.37-1.19-.46-1.2-1.11-1.53-1.11-1.53-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.79-4.58 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .28.18.61.69.5A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>
+          View source on GitHub
+        </a>
+        <a class="btn btn-ghost" href="../index.html#projects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 12H5M11 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back to all projects
+        </a>
+      </div>
+      <p class="foot-note">Built for the Pattern Recognition &amp; Neural Networks course at North South University, with Satavisa Dey Borno. A paper based on this framework is currently under review.</p>
+    </div>
+  </section>
+</main>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

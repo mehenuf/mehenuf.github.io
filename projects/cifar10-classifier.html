@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIFAR-10 with SE-ResNet, CutMix & Calibration — Md. Mehenuf Hossain Bhuiyan</title>
+<meta name="description" content="A custom SE-ResNet trained from scratch on CIFAR-10: 95.48% top-1, CutMix, Focal Loss, and temperature-scaled calibration, deployed as a Gradio app.">
+<meta name="theme-color" content="#F5F6F8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0C0E15" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2312141C'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' fill='%23fff' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<script>
+(function(){
+  var d=document.documentElement; d.classList.add('js');
+  var s=null; try{ s=localStorage.getItem('theme'); }catch(e){}
+  var p=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+  d.setAttribute('data-theme', s||(p?'dark':'light'));
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="../index.html#top" class="brand"><span class="mark"><span>M</span></span> Mehenuf</a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#timeline">Timeline</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#work">Projects</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="mailto:mehenuf@gmail.com?subject=R%C3%A9sum%C3%A9%20request%20%E2%80%94%20portfolio&body=Hi%20Mehenuf%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20a%20copy%20of%20your%20CV%2Fr%C3%A9sum%C3%A9.%0A%0AName%3A%0ACompany%2Forganisation%3A%0ARole%20or%20context%3A%0A%0AThanks%2C"><svg viewBox="0 0 24 24"><path d="M12 3v11m0 0-4-4m4 4 4-4M5 20h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Request résumé</a>
+      <button class="icon-btn theme-toggle" aria-label="Switch to dark theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="icon-btn nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="p-hero">
+    <div class="wrap">
+      <a class="p-back reveal" href="../index.html#work"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to projects</a>
+      <div class="kicker reveal">Personal project · 2026</div>
+      <h1 class="reveal">I didn't chase a higher number. I found the four errors the model kept making, and fixed those.</h1>
+      <p class="sub reveal">A custom SE-ResNet CNN trained from scratch on CIFAR-10 — no pretrained weights. Every change in V2 was aimed at a specific, measured failure in V1.</p>
+      <div class="p-tags reveal"><span>PyTorch</span><span>SE-ResNet</span><span>CutMix</span><span>Focal Loss</span><span>Temperature Scaling</span><span>Gradio</span></div>
+      <div class="p-cta-row reveal">
+        <a class="btn btn-primary" href="https://github.com/mehenuf/cifar10-classifier" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.1.68-.22.68-.5 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.19-3.37-1.19-.46-1.2-1.11-1.53-1.11-1.53-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.79-4.58 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .28.18.61.69.5A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>View source on GitHub</a>
+        <a class="btn btn-ghost" href="../index.html#contact">Ask me about this</a>
+      </div>
+      <div class="facts" data-stagger style="margin-top:44px;"><div class="fact"><div class="k">95.48<span class='u'>%</span></div><div class="v">Top-1 accuracy on 10,000 held-out test images</div></div><div class="fact"><div class="k">99.83<span class='u'>%</span></div><div class="v">Top-5 accuracy — 9,983 of 10,000 correct in top five</div></div><div class="fact"><div class="k">0.9498</div><div class="v">Matthews correlation coefficient / Cohen's kappa</div></div><div class="fact"><div class="k">−17<span class='u'>%</span></div><div class="v">Cat↔dog confusion errors, V1 → V2 (120 → 100)</div></div></div>
+    </div>
+  </section>
+
+  <section class="p-section">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="kicker">The problem</div>
+        <h2>Pretrained backbones make CIFAR-10 easy. Training from scratch exposes what the architecture actually learned.</h2>
+        <p class="p-lede">V1 was an ordinary ResNet-style CNN that reached 94.81%. That number looks fine until you open the confusion matrix — 120 of the errors were the model mistaking cats for dogs and dogs for cats. Averaged accuracy was hiding a specific, structural weakness.</p>
+      </div>
+      <div class="p-block reveal"><ul><li><b>The model weighted every feature channel equally.</b> Nothing let it amplify whisker-and-pointed-ear channels when it was looking at a cat and suppress them when it wasn't.</li><li><b>It had only ever seen whole objects.</b> Standard augmentation never showed it a partial view, so an unusual angle or an occlusion pushed it off a cliff.</li><li><b>Easy examples dominated the gradient.</b> Cross-entropy spent most of its signal confirming images the model already got right, instead of on the ambiguous cat/dog boundary.</li><li><b>Confidence meant nothing.</b> Raw softmax scores were badly calibrated, so a '95% sure' prediction was not right 95% of the time.</li></ul></div>
+
+    </div>
+  </section>
+  <section class="p-section">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="kicker">The approach</div>
+        <h2>Four research-backed changes, each aimed at one of those four failures.</h2>
+        
+      </div>
+      <div class="pipeline" data-stagger>
+        <div class="pipe-step"><span class="pn">01</span><h4>Squeeze-and-Excitation blocks</h4><p>An SE block inside every residual block learns to reweight feature channels per image — the fix for treating all channels equally.</p></div>
+        <div class="pipe-step"><span class="pn">02</span><h4>CutMix augmentation</h4><p>Cuts a patch from one training image into another and mixes labels by area, forcing recognition from partial views.</p></div>
+        <div class="pipe-step"><span class="pn">03</span><h4>Focal Loss (γ = 2.0)</h4><p>A (1−pt)^γ factor down-weights easy examples so capacity goes to the hard boundary cases.</p></div>
+        <div class="pipe-step"><span class="pn">04</span><h4>Temperature scaling</h4><p>One learned scalar recalibrates softmax confidence after training, without touching accuracy.</p></div>
+        <div class="pipe-step"><span class="pn">05</span><h4>Gradio deployment</h4><p>The whole pipeline — preprocessing through calibrated prediction — wrapped for real-time GPU inference.</p></div>
+      </div>
+
+    </div>
+  </section>
+  <section class="p-section">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="kicker">Results</div>
+        <h2>Where the gains landed — and where they didn't.</h2>
+        <p class="p-lede">Headline accuracy moved +0.67%. The more interesting story is which classes moved.</p>
+      </div>
+      <div class="table-scroll reveal"><table class="m-table"><thead><tr><th>Metric</th><th>V1 baseline</th><th>V2 improved</th><th>Change</th></tr></thead><tbody><tr><td>Top-1 accuracy</td><td><span class='num'>94.81%</span></td><td><span class='best'>95.48%</span></td><td><span class='num'>+0.67</span></td></tr><tr><td>Top-5 accuracy</td><td><span class='num'>99.57%</span></td><td><span class='best'>99.83%</span></td><td><span class='num'>+0.26</span></td></tr><tr><td>Macro F1</td><td><span class='num'>0.9480</span></td><td><span class='best'>0.9548</span></td><td><span class='num'>+0.0068</span></td></tr><tr><td>Matthews MCC</td><td><span class='num'>0.9423</span></td><td><span class='best'>0.9498</span></td><td><span class='num'>+0.0075</span></td></tr><tr><td>Cat accuracy</td><td><span class='num'>86.9%</span></td><td><span class='best'>89.8%</span></td><td><span class='num'>+2.9</span></td></tr><tr><td>Bird accuracy</td><td><span class='num'>92.3%</span></td><td><span class='best'>94.7%</span></td><td><span class='num'>+2.4</span></td></tr><tr><td>Truck accuracy</td><td><span class='num'>97.1%</span></td><td><span class='warn'>95.4%</span></td><td><span class='num'>−1.7</span></td></tr><tr><td>GPU throughput</td><td><span class='num'>13,671 img/s</span></td><td><span class='num'>13,206 img/s</span></td><td><span class='num'>−3% (SE cost)</span></td></tr></tbody></table></div>
+      <p class="note">Truck regressed by design: Focal Loss made the model less willing to commit on genuinely ambiguous vehicle boundaries. The errors went up, the confidence behind them went down.</p>
+      <div class="finding-grid" data-stagger>
+        <div class="finding"><span class="tag">TARGETED</span><div><h3>The biggest gains landed exactly where they were aimed</h3><p>Cat +2.9% and bird +2.4% were the two weakest classes in V1. Cat↔dog confusion fell from 120 errors to 100 — a 17% reduction on the pair the whole intervention targeted.</p></div></div>
+        <div class="finding"><span class="tag">CALIBRATION</span><div><h3>Temperature scaling cut expected calibration error by ~38%</h3><p>ECE fell from 0.163 to 0.101 on the held-out set. Still short of well-calibrated — the honest read is that it's better, not solved, and a proper validation-split temperature search is the next step.</p></div></div>
+        <div class="finding"><span class="tag">HONEST LIMITS</span><div><h3>Cat is still the weakest class at 89.8%</h3><p>Every other class sits at or above 93%. The remaining gap is a genuine limit of 32×32 resolution rather than something another augmentation trick fixes.</p></div></div>
+      </div>
+
+    </div>
+  </section>
+  <section class="p-section">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="kicker">From the repo</div>
+        <h2>Training curves, confusion analysis, and the deployed app.</h2>
+        <p class="p-lede">All generated by the evaluation notebook in the repository. Click any chart to enlarge.</p>
+      </div>
+      <div class="gallery">
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Results dashboard"><img src="../assets/img/cifar/nb_dashboard.jpg" alt="Final results dashboard showing headline metrics and per-class accuracy" width="1448" height="929" loading="lazy" decoding="async"><figcaption><b>Results dashboard</b>Headline metrics plus per-class accuracy. Cat is visibly the outlier.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Training curves — V2"><img src="../assets/img/cifar/nb_training_curves.jpg" alt="V2 training and validation curves over 200 epochs" width="1500" height="558" loading="lazy" decoding="async"><figcaption><b>Training curves — V2</b>200 epochs with Focal Loss. The jagged train loss is expected: the loss is actively re-weighting hard examples each batch.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Confusion matrix"><img src="../assets/img/cifar/nb_confusion_matrix.jpg" alt="Confusion matrix for the ten CIFAR-10 classes" width="1500" height="617" loading="lazy" decoding="async"><figcaption><b>Confusion matrix</b>The cat/dog block is where nearly all remaining error concentrates.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Target confusion pairs"><img src="../assets/img/cifar/nb_confusion_pairs.jpg" alt="Target confusion pairs before and after the V2 changes" width="1418" height="436" loading="lazy" decoding="async"><figcaption><b>Target confusion pairs</b>Cat→dog and dog→cat errors, V1 versus V2. The pair total drops from 120 to 100.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: CutMix examples"><img src="../assets/img/cifar/nb_cutmix_examples.jpg" alt="Examples of CutMix augmentation applied to training images" width="1500" height="465" loading="lazy" decoding="async"><figcaption><b>CutMix examples</b>Original above, augmented below. Labels blend proportionally to patch area.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Calibration comparison"><img src="../assets/img/cifar/nb_calibration_comparison.jpg" alt="Reliability diagram before and after temperature scaling" width="1419" height="544" loading="lazy" decoding="async"><figcaption><b>Calibration comparison</b>Reliability before and after temperature scaling.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Per-class metrics"><img src="../assets/img/cifar/nb_per_class_metrics.jpg" alt="Per-class precision, recall and F1 scores" width="1500" height="593" loading="lazy" decoding="async"><figcaption><b>Per-class metrics</b>Precision, recall, and F1 across all ten classes.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Ablation study"><img src="../assets/img/cifar/nb_ablation.jpg" alt="Ablation study isolating the contribution of each change" width="1308" height="538" loading="lazy" decoding="async"><figcaption><b>Ablation study</b>Isolating what each of the four changes actually contributed.</figcaption></figure>
+      </div>
+      <div class="gallery">
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Gradio app — prediction"><img src="../assets/img/cifar/app_prediction.jpg" alt="The Gradio web app returning a calibrated prediction" width="1146" height="1438" loading="lazy" decoding="async"><figcaption><b>Gradio app — prediction</b>Real-time inference with calibrated class probabilities.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Gradio app — empty state"><img src="../assets/img/cifar/app_empty.jpg" alt="The Gradio web app in its empty state" width="1140" height="1302" loading="lazy" decoding="async"><figcaption><b>Gradio app — empty state</b>The upload interface before a prediction is run.</figcaption></figure>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="p-section">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="kicker">Built with</div>
+        <div class="chip-row"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">torchvision</span><span class="chip">NumPy</span><span class="chip">scikit-learn</span><span class="chip">Gradio</span><span class="chip">CUDA</span></div>
+      </div>
+      <div class="p-nav">
+        <a href="flood-alert-system.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Flood Alert System</a>
+        <a href="../index.html#work">All projects</a>
+        <a href="patient-care-operating-system.html">Patient Care Operating System<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span class="foot-note">© <span data-year></span> Md. Mehenuf Hossain Bhuiyan</span>
+    <div class="footer-links">
+      <a href="https://github.com/mehenuf" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/mehenuf" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://scholar.google.com/citations?user=QUsIy4QAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+      <a href="mailto:mehenuf@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
