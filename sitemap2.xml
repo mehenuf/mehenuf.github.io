@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="https://www.xml-sitemaps.com/css/sitemap.css"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+       <loc>https://mehenuf.me/</loc>
+       <lastmod>2026-08-17T09:48:22+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>1.0000</priority>
+  </url>
+  <url>
+       <loc>https://mehenuf.me/projects/cifar10-classifier.html</loc>
+       <lastmod>2026-08-17T09:48:21+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://mehenuf.me/projects/patient-care-operating-system.html</loc>
+       <lastmod>2026-08-17T09:48:22+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://mehenuf.me/projects/credit-scoring-blockchain.html</loc>
+       <lastmod>2026-08-17T09:48:22+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://mehenuf.me/projects/corn-leaf-xai.html</loc>
+       <lastmod>2026-08-17T09:48:21+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://mehenuf.me/projects/perfume-store-rdbms.html</loc>
+       <lastmod>2026-08-17T09:48:21+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://mehenuf.me/projects/flood-alert-system.html</loc>
+       <lastmod>2026-08-17T09:48:22+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://mehenuf.me/index.html</loc>
+       <lastmod>2026-08-17T09:48:21+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+</urlset>
