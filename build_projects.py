@@ -49,6 +49,8 @@ SHELL = """<!DOCTYPE html>
 </head>
 <body>
 
+<a href="#top" class="skip-link">Skip to content</a>
+
 <header class="nav">
   <div class="nav-inner">
     <a href="../index.html#top" class="brand"><span class="mark"><span>M</span></span> Mehenuf</a>
@@ -58,6 +60,7 @@ SHELL = """<!DOCTYPE html>
       <a href="../index.html#research">Research</a>
       <a href="../index.html#skills">Skills</a>
       <a href="../index.html#work">Projects</a>
+      <a href="../index.html#leadership">Leadership</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
     <div class="nav-cta">
@@ -73,7 +76,7 @@ SHELL = """<!DOCTYPE html>
   </div>
 </header>
 
-<main>
+<main id="top" tabindex="-1">
   <section class="p-hero">
     <div class="wrap">
       <div data-stagger>

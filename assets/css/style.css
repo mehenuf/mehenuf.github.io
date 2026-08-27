@@ -27,7 +27,7 @@
 :root{
   --ink:#12141C;
   --ink-soft:#4A5165;
-  --ink-faint:#8892A6;
+  --ink-faint:#5E667B;
   --paper:#F5F6F8;
   --paper-sunk:#EDEFF3;
   --panel:#FFFFFF;
@@ -82,7 +82,7 @@
 [data-theme="dark"]{
   --ink:#E9EBF2;
   --ink-soft:#A2AABF;
-  --ink-faint:#6F7890;
+  --ink-faint:#8891A8;
   --paper:#0C0E15;
   --paper-sunk:#080A10;
   --panel:#141822;
@@ -161,6 +161,15 @@ h1,h2,h3,h4{
   outline-offset:3px;
   border-radius:4px;
 }
+
+.skip-link{
+  position:absolute; top:-100%; left:16px; z-index:200;
+  background:var(--ink); color:var(--paper);
+  font-family:'Inter',system-ui,sans-serif; font-size:14px; font-weight:600;
+  padding:12px 18px; border-radius:var(--radius-sm);
+  transition:top var(--dur-ui) var(--ease-out);
+}
+.skip-link:focus{ top:16px; }
 
 .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
 
@@ -411,11 +420,10 @@ html.js .reveal-img.in figcaption{ opacity:1; transition:opacity 320ms var(--eas
 .hero .accent{ color:var(--violet); }
 .hero .role-line{
   margin-top:18px; font-family:'JetBrains Mono',monospace; font-size:12.5px;
-  color:var(--teal-deep); line-height:1.9; max-width:560px;
+  color:var(--ink-soft); line-height:1.9; max-width:560px;
 }
 .hero .sub{ margin-top:16px; max-width:545px; color:var(--ink-soft); font-size:16.5px; }
 .hero .cta-row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
-.hero .cta-row.profile-row{ margin-top:14px; }
 .hero .meta-row{
   display:flex; flex-wrap:wrap; gap:20px; margin-top:30px;
   font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--ink-faint);
@@ -426,25 +434,6 @@ html.js .reveal-img.in figcaption{ opacity:1; transition:opacity 320ms var(--eas
   .hero .meta-row a:hover{ color:var(--violet-deep); }
 }
 .hero .meta-row svg{ width:14px; height:14px; opacity:.7; flex:none; }
-
-/* --- Hero figure: a photo placeholder, styled like the gallery
-   placeholders used throughout the case studies — same visual language
-   for "swap this for a real asset" everywhere on the site. --- */
-.photo-frame{
-  position:relative; border-radius:var(--radius-lg); overflow:hidden;
-  aspect-ratio:4/5; border:1.5px dashed var(--line-strong);
-  background:repeating-linear-gradient(135deg, var(--paper) 0 10px, var(--panel) 10px 20px);
-  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px;
-  text-align:center; padding:32px;
-}
-.photo-frame .icon{
-  width:56px; height:56px; border-radius:50%; background:var(--panel);
-  border:1px solid var(--line-strong); display:flex; align-items:center; justify-content:center;
-  color:var(--ink-faint); box-shadow:var(--shadow-sm);
-}
-.photo-frame .icon svg{ width:24px; height:24px; }
-.photo-frame .label{ font-size:14px; font-weight:600; color:var(--ink-soft); }
-.photo-frame .sub{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink-faint); max-width:220px; }
 
 /* ---------- FACT STRIP ---------- */
 .facts{
@@ -730,7 +719,7 @@ html.js .reveal-img.in figcaption{ opacity:1; transition:opacity 320ms var(--eas
   .lead-card:hover::before{ opacity:1; }
 }
 .lead-card .yr{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink-faint); margin-bottom:10px; }
-.lead-card h4{ font-size:14.5px; margin-bottom:5px; line-height:1.35; }
+.lead-card h3{ font-size:14.5px; margin-bottom:5px; line-height:1.35; }
 .lead-card .org{ font-size:12.5px; color:var(--ink-soft); margin-bottom:10px; }
 .lead-card p{ font-size:13px; color:var(--ink-soft); margin:0; line-height:1.55; }
 
