@@ -455,11 +455,32 @@
     <div class="wrap">
       <div class="section-head reveal">
         <div class="kicker">Selected work</div>
-        <h2>Seven projects, seven different constraints.</h2>
+        <h2>The four most recent, one different constraint each.</h2>
         <p>Each opens a full case study - the problem, the architecture, and the measured results, with the charts straight out of the repo.</p>
       </div>
 
       <div class="projects-grid">
+
+        <a class="proj-card reveal" href="projects/car-rental-platform.html">
+          <div class="proj-media">
+            <svg class="glyph" viewBox="0 0 120 120" fill="none">
+              <path d="M14 74 22 50c2-6 8-10 14-10h34c6 0 12 4 14 10l8 24" stroke="var(--ink-soft)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="8" y="74" width="104" height="18" rx="9" stroke="var(--ink-soft)" stroke-width="3.2"/>
+              <circle cx="34" cy="92" r="10" stroke="var(--ink-soft)" stroke-width="3.2"/>
+              <circle cx="86" cy="92" r="10" stroke="var(--ink-soft)" stroke-width="3.2"/>
+              <path d="M30 58h60" stroke="var(--ink-faint)" stroke-width="2"/>
+              <path d="M76 16h28a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4h-8l-7 7v-7h-13a4 4 0 0 1-4-4V20a4 4 0 0 1 4-4Z" stroke="var(--violet-deep)" stroke-width="2.4" stroke-linejoin="round" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="proj-body">
+            <div class="row-top"><h3>BestCar - Full-Stack Car Rental Platform</h3><span class="proj-metric">Live data, no mocks</span></div>
+            <p>A car rental platform built for a Web Designer/Web Developer + AI Automation assessment: a frictionless booking flow, a live operational dashboard for staff, role-gated admin access, and a chat assistant grounded in real inventory feeding a working n8n lead automation.</p>
+            <div class="proj-tags"><span>Next.js</span><span>Supabase</span><span>Admin Dashboard</span><span>n8n</span></div>
+            <div class="proj-links">
+              <span class="proj-link">Read case study <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+          </div>
+        </a>
 
         <a class="proj-card reveal" href="projects/cifar10-classifier.html">
           <div class="proj-media">
@@ -525,87 +546,13 @@
           </div>
         </a>
 
-        <a class="proj-card reveal" href="projects/corn-leaf-xai.html">
-          <div class="proj-media">
-            <svg class="glyph" viewBox="0 0 120 120" fill="none">
-              <path d="M60 108C30 96 18 66 30 36 48 12 84 10 100 24 98 66 84 96 60 108Z" stroke="var(--ink-soft)" stroke-width="3.2" stroke-linejoin="round"/>
-              <path d="M60 108V30" stroke="var(--ink-soft)" stroke-width="2.4"/>
-              <circle cx="58" cy="52" r="10" stroke="var(--violet-deep)" stroke-width="2.6" stroke-dasharray="3 4"/>
-              <circle cx="58" cy="52" r="20" stroke="var(--violet-deep)" stroke-width="2" stroke-dasharray="3 4" opacity="0.55"/>
-            </svg>
-          </div>
-          <div class="proj-body">
-            <div class="row-top"><h3>XAI-Driven Lesion-Aware Multi-Teacher Knowledge Distillation</h3><span class="proj-metric">15.5 ms on CPU</span></div>
-            <p>A U-Net-guided Inception teacher distilled into a MobileNetV3 student and quantized to INT8 - keeping teacher-grade F1 while running fast enough for edge deployment. Grad-CAM validates it looks at the lesion.</p>
-            <div class="proj-tags"><span>Grad-CAM</span><span>Distillation</span><span>QAT / INT8</span><span>DeiT</span></div>
-            <div class="proj-links">
-              <span class="proj-link">Read case study <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </div>
-          </div>
-        </a>
+      </div>
 
-        <a class="proj-card reveal" href="projects/perfume-store-rdbms.html">
-          <div class="proj-media">
-            <svg class="glyph" viewBox="0 0 120 120" fill="none">
-              <g stroke="var(--violet-deep)" stroke-width="3">
-                <rect x="10" y="16" width="34" height="22" rx="4"/><rect x="76" y="16" width="34" height="22" rx="4"/>
-                <rect x="43" y="52" width="34" height="22" rx="4"/><rect x="10" y="88" width="34" height="22" rx="4"/><rect x="76" y="88" width="34" height="22" rx="4"/>
-              </g>
-              <g stroke="var(--ink-faint)" stroke-width="2">
-                <path d="M27 38v14M93 38v14M60 74v14M27 66v34M93 66v22"/>
-              </g>
-            </svg>
-          </div>
-          <div class="proj-body">
-            <div class="row-top"><h3>Relational DBMS - E-Commerce Perfume Store</h3><span class="proj-metric">3NF schema</span></div>
-            <p>A fully normalized MySQL schema with PL/SQL triggers and ACID-compliant transactions, behind a full-stack PHP storefront with cart management and a secure admin dashboard.</p>
-            <div class="proj-tags"><span>MySQL</span><span>PL/SQL</span><span>PHP</span></div>
-            <div class="proj-links">
-              <span class="proj-link">Read case study <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </div>
-          </div>
+      <div class="work-more reveal">
+        <a class="btn btn-ghost" href="projects/index.html">
+          View all 7 projects
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-
-        <a class="proj-card reveal" href="projects/flood-alert-system.html">
-          <div class="proj-media">
-            <svg class="glyph" viewBox="0 0 120 120" fill="none">
-              <path d="M60 14 76 46H44L60 14Z" stroke="var(--ink-soft)" stroke-width="3.2" stroke-linejoin="round"/>
-              <path d="M60 46v20" stroke="var(--ink-soft)" stroke-width="3.2"/>
-              <path d="M10 78c8 8 16-8 24 0s16 8 24 0 16-8 24 0 16 8 24 0" stroke="var(--ink-soft)" stroke-width="3.2" stroke-linecap="round"/>
-              <path d="M10 98c8 8 16-8 24 0s16 8 24 0 16-8 24 0 16 8 24 0" stroke="var(--violet-deep)" stroke-width="3.2" stroke-linecap="round" opacity="0.65"/>
-            </svg>
-          </div>
-          <div class="proj-body">
-            <div class="row-top"><h3>Flood Alert &amp; Relief Coordination System</h3><span class="proj-metric">Geolocation routing</span></div>
-            <p>A disaster-relief platform built on Firebase: live flood tracking, geolocation-based alert routing, and an admin dashboard for resource allocation and volunteer dispatch.</p>
-            <div class="proj-tags"><span>Firebase</span><span>JavaScript</span><span>Geolocation</span></div>
-            <div class="proj-links">
-              <span class="proj-link">Read case study <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </div>
-          </div>
-        </a>
-
-        <a class="proj-card reveal" href="projects/car-rental-platform.html">
-          <div class="proj-media">
-            <svg class="glyph" viewBox="0 0 120 120" fill="none">
-              <path d="M14 74 22 50c2-6 8-10 14-10h34c6 0 12 4 14 10l8 24" stroke="var(--ink-soft)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-              <rect x="8" y="74" width="104" height="18" rx="9" stroke="var(--ink-soft)" stroke-width="3.2"/>
-              <circle cx="34" cy="92" r="10" stroke="var(--ink-soft)" stroke-width="3.2"/>
-              <circle cx="86" cy="92" r="10" stroke="var(--ink-soft)" stroke-width="3.2"/>
-              <path d="M30 58h60" stroke="var(--ink-faint)" stroke-width="2"/>
-              <path d="M76 16h28a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4h-8l-7 7v-7h-13a4 4 0 0 1-4-4V20a4 4 0 0 1 4-4Z" stroke="var(--violet-deep)" stroke-width="2.4" stroke-linejoin="round" opacity="0.9"/>
-            </svg>
-          </div>
-          <div class="proj-body">
-            <div class="row-top"><h3>BestCar - Full-Stack Car Rental Platform</h3><span class="proj-metric">Live data, no mocks</span></div>
-            <p>A car rental platform built for a Web Designer/Web Developer + AI Automation assessment: a frictionless booking flow, a live operational dashboard for staff, role-gated admin access, and a chat assistant grounded in real inventory feeding a working n8n lead automation.</p>
-            <div class="proj-tags"><span>Next.js</span><span>Supabase</span><span>Admin Dashboard</span><span>n8n</span></div>
-            <div class="proj-links">
-              <span class="proj-link">Read case study <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </div>
-          </div>
-        </a>
-
       </div>
     </div>
   </section>

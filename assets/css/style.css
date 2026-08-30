@@ -635,6 +635,8 @@ html.js .reveal-img.in figcaption{ opacity:1; transition:opacity 320ms var(--eas
 .projects-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
 @media (max-width:860px){ .projects-grid{ grid-template-columns:1fr; } }
 
+.work-more{ display:flex; justify-content:center; margin-top:36px; }
+
 .proj-card{
   background:var(--panel); border:1px solid var(--line); border-radius:var(--radius-lg);
   overflow:hidden; display:flex; flex-direction:column;
