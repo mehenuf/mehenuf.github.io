@@ -6,7 +6,7 @@ Keep this file — you'll come back to it.
 
 **Quick orientation:** this is a plain HTML/CSS/JS site. No framework, no
 `npm install`, no build step for the homepage. The only tool involved is a
-small Python script that generates the six project pages from one shared
+small Python script that generates the seven project pages from one shared
 template, so their nav/footer/theme code can never drift out of sync with
 each other. You'll use it any time you touch a project page.
 
@@ -206,7 +206,7 @@ for finding things with your editor's search):
 | Timeline | `#timeline` | Education only — SSC, HSC, BSc |
 | Research Experience | `#research` | Undergrad research + capstone, own mini-timeline |
 | Skills | `#skills` | Core-stack row + categorised skill cards |
-| Projects | `#work` | The six project cards |
+| Projects | `#work` | The seven project cards |
 | Publications | `#publications` | The two paper cards |
 | Leadership | `#leadership` | Extracurricular / leadership cards |
 | Contact | `#contact` | CTA panel + buttons |
@@ -464,8 +464,8 @@ Covered in 4.4 above.
 ### 5.3 Project card icons on the homepage
 
 Each project card in `index.html` has a small hand-drawn SVG icon rather
-than a screenshot (`class="glyph"`), so the six cards read as one
-consistent set instead of six different image crops. If you'd rather use a
+than a screenshot (`class="glyph"`), so the seven cards read as one
+consistent set instead of seven different image crops. If you'd rather use a
 real thumbnail image for a given card, replace its `<svg class="glyph">...
 </svg>` block with an `<img>`:
 
@@ -493,7 +493,7 @@ study page) and `index.html` (adds the card to the grid).
 
 ### 6.2 Add the entry to `build_projects.py`
 
-Open `build_projects.py` and find the `PAGES` dictionary — six entries,
+Open `build_projects.py` and find the `PAGES` dictionary — seven entries,
 each starting with `PAGES["something.html"] = dict(`. Copy one whole entry
 as your template (the CIFAR-10 one is the most complete example) and change
 every field. Here's what each one controls:
@@ -556,7 +556,7 @@ Your new page's `prev_href`/`next_href` point at two existing pages — now
 update **those two pages** so the chain connects both directions. Find
 whichever page you set as `prev_href` and change its `next_href` (and
 `next_label`) to point at your new page; do the same for the page you set
-as `next_href`, changing its `prev_href`. (Look at how the existing six
+as `next_href`, changing its `prev_href`. (Look at how the existing seven
 entries link to each other for the exact pattern — it's a simple loop.)
 
 ### 6.4 Regenerate
@@ -566,7 +566,7 @@ python3 build_projects.py
 ```
 
 This rewrites everything in `projects/` from scratch. You should see your
-new file listed in the output alongside the six existing ones.
+new file listed in the output alongside the seven existing ones.
 
 ### 6.5 Add the card to the homepage grid
 

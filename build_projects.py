@@ -254,7 +254,7 @@ PAGES["cifar10-classifier.html"] = dict(
         ("−17<span class='u'>%</span>", "Cat↔dog confusion errors, V1 → V2 (120 → 100)"),
     ]),
     stack=chips(["Python", "PyTorch", "torchvision", "NumPy", "scikit-learn", "Gradio", "CUDA"]),
-    prev_href="flood-alert-system.html", prev_label="Flood Alert System",
+    prev_href="car-rental-platform.html", prev_label="BestCar Rental Platform",
     next_href="patient-care-operating-system.html", next_label="Patient Care Operating System",
     body=(
         section("The problem",
@@ -319,9 +319,9 @@ PAGES["cifar10-classifier.html"] = dict(
                      "Ablation study", "Isolating what each of the four changes actually contributed."),
                 ]) +
                 gallery([
-                    ("../assets/img/cifar/app_prediction.jpg", "The Gradio web app returning a calibrated prediction",
+                    ("../assets/img/cifar/app_prediction.png", "The Gradio web app returning a calibrated prediction",
                      "Gradio app - prediction", "Real-time inference with calibrated class probabilities."),
-                    ("../assets/img/cifar/app_empty.jpg", "The Gradio web app in its empty state",
+                    ("../assets/img/cifar/app_empty.png", "The Gradio web app in its empty state",
                      "Gradio app - empty state", "The upload interface before a prediction is run."),
                 ]))
     ),
@@ -635,7 +635,7 @@ PAGES["flood-alert-system.html"] = dict(
     ]),
     stack=chips(["JavaScript", "Firebase", "Firestore", "HTML", "CSS", "Git"]),
     prev_href="perfume-store-rdbms.html", prev_label="Perfume Store RDBMS",
-    next_href="cifar10-classifier.html", next_label="CIFAR-10 Classifier",
+    next_href="car-rental-platform.html", next_label="BestCar Rental Platform",
     body=(
         section("The problem",
                 "Relief efforts rarely fail for lack of willingness. They fail on latency.",
@@ -672,6 +672,84 @@ PAGES["flood-alert-system.html"] = dict(
                 "Screenshots to add.",
                 "",
                 '      <p class="note reveal">The repository ships the application pages - <code>index.html</code>, <code>flood-tracking.html</code>, <code>forecast.html</code>, and <code>admin-dashboard.html</code> - rather than exported screenshots. Run it with your Firebase config and capture each view into <code>assets/img/flood/</code> to drop them into this page.</p>\n')
+    ),
+)
+
+# -------------------------------------------------------- CAR RENTAL
+PAGES["car-rental-platform.html"] = dict(
+    title="BestCar - Full-Stack Car Rental Platform with AI Assistant",
+    desc="A car rental platform built for a Web Designer/Web Developer + AI Automation technical assessment: a booking flow, a live operational admin dashboard, role-gated access, and a grounded chat assistant feeding a working n8n lead automation - all on one real Supabase database.",
+    eyebrow="Technical assessment · Web Designer/Web Developer + AI Automation role · Aug 2026",
+    headline="Every number on the admin dashboard reads from a live database. None of it is sample data.",
+    sub="A car rental platform built for a Web Designer/Web Developer + AI Automation technical assessment - a frictionless booking flow, a live operational dashboard for staff, role-gated admin access, and a chat assistant grounded in real inventory that feeds a working n8n lead automation, all running against one real Supabase database.",
+    tags=tags(["Next.js 16", "TypeScript", "Supabase", "Tailwind v4", "n8n", "Groq + Gemini"]),
+    primary_cta=f'<a class="btn btn-primary" href="https://car-rental-project-mehenuf.vercel.app/" target="_blank" rel="noopener">{EXT}View live site</a>',
+    repo="https://github.com/mehenuf/car-rental-project",
+    extra_cta=(f'<a class="btn btn-ghost" href="https://github.com/mehenuf/car-rental-project" target="_blank" rel="noopener">{GH_ICON}View source</a>'
+               '<a class="btn btn-ghost" href="../index.html#contact">Ask me about this</a>'),
+    facts=facts([
+        ("0", "Hard-coded numbers - every dashboard figure and vehicle listing is a live Supabase query"),
+        ("6", "Live views on one admin dashboard - revenue, best-sellers, sales by country, bookings, leads, inventory"),
+        ("17", "REST endpoints, every one validated with Zod before it touches the database"),
+        ("Groq → Gemini", "Two-provider fallback keeps the chat assistant answering through a provider outage"),
+    ]),
+    stack=chips(["Next.js 16", "React 19", "TypeScript", "Supabase (Postgres + Auth)", "Tailwind CSS v4", "shadcn/ui", "Zod", "Groq", "Gemini", "n8n", "Recharts"]),
+    prev_href="flood-alert-system.html", prev_label="Flood Alert System",
+    next_href="cifar10-classifier.html", next_label="CIFAR-10 Classifier",
+    body=(
+        section("The brief",
+                "A rental site has three different people to satisfy, and each one breaks it in a different way.",
+                "The assessment asked for a customer-facing rental site, an admin dashboard, and an AI feature backed by a working automation. Framing it around who actually uses each piece, rather than a feature checklist, is what shaped the build.",
+                block([
+                    "<b>A customer deciding among rental sites won't tolerate a slow or confusing booking flow.</b> If they can't quickly see what's available, at what price, and how to reserve it, they leave for a competitor.",
+                    "<b>Staff need a live, current view of the fleet and bookings - not a spreadsheet.</b> Checking a raw database to answer 'how's revenue trending' or 'which bookings need attention today' doesn't scale past a handful of people.",
+                    "<b>A visitor with a question, not yet a decision, is the easiest lead to lose.</b> If answering 'is a bigger car available' takes an email or a phone call, most people leave instead of asking.",
+                ])) +
+        section("The approach",
+                "One build per audience, all reading from the same database.",
+                "",
+                pipeline([
+                    ("Friction-free booking", "Searchable, filterable listings (category, price, seats, transmission, fuel), a detail page per vehicle, and a booking flow that never requires an account first - matching how people actually shop for a rental."),
+                    ("A dashboard staff would actually use", "Live revenue against the prior period, a best-seller ranking, sales by country, a searchable bookings table with one-click status changes, and full vehicle inventory CRUD - reading from the same tables the customer site writes to."),
+                    ("A chat assistant grounded in real inventory", "Live on every page, answering with specific real vehicles and prices pulled from the current fleet - with Gemini as an automatic fallback if the primary Groq call fails."),
+                    ("Silent lead scoring", "Once a conversation reaches a few messages, it's scored in the background for booking likelihood, budget, and urgency, and surfaces on the dashboard ranked highest first - no one reads a transcript to find the serious buyers."),
+                    ("Leads land where the team already looks", "An n8n workflow logs every scored lead to a Google Sheet the moment it's created, instead of asking a small sales team to adopt a new dashboard habit."),
+                    ("Access checked on every request, not just the front door", "Customer and staff accounts share one login system; only a role check that runs on every request touching sensitive data - not only the dashboard page - can reach it."),
+                ])) +
+        section("Results",
+                "What's actually live - and what's honestly still a placeholder.",
+                "",
+                findings([
+                    ("OPERATIONAL", "The dashboard reflects what's actually happening, not a snapshot",
+                     "Revenue, best-sellers, sales by country, bookings, and leads all read from the same Supabase tables the customer site writes to - there's no separate content layer to keep in sync or let go stale."),
+                    ("GROUNDED", "The assistant only ever names cars that exist",
+                     "Every reply is generated with the live, available-vehicle list injected as the model's source of truth, and every picture-card recommendation is a real slug pulled from that same query - there's no path for it to invent a car, price, or feature."),
+                    ("RESPONSIVE", "Built and tested at phone, tablet, and desktop, not just shrunk down",
+                     "Both the customer site and the admin dashboard adapt navigation, forms, and touch targets at each width - a meaningful share of visitors to a site like this are comparing options on a phone."),
+                    ("HONEST LIMITS", "No real per-date availability check yet",
+                     "Vehicles carry a static <code>available</code> flag and a <code>stock</code> count, not a booking-conflict engine - two customers could request the same car for overlapping dates and both would land as <code>pending</code> for an admin to resolve manually. Flagged in the project's own write-up as the top next step, not discovered after the fact."),
+                ])) +
+        section("From the app",
+                "The customer site, the admin dashboard, and the automation it feeds.",
+                "",
+                gallery([
+                    ("../assets/img/car-rental/homepage-desktop.png", "BestCar homepage on desktop showing the vehicle inventory grid",
+                     "Homepage - desktop", "The customer-facing inventory grid, filterable by category and price."),
+                    ("../assets/img/car-rental/homepage-mobile.png", "BestCar homepage on mobile",
+                     "Homepage - mobile", "The same inventory browsing experience, responsive down to mobile."),
+                    ("../assets/img/car-rental/chat-widget.png", "The chat assistant recommending real vehicles with picture cards",
+                     "Chat assistant in use", "A grounded recommendation - every card links to a real vehicle detail page."),
+                    ("../assets/img/car-rental/admin-dashboard-desktop.png", "Admin dashboard on desktop showing revenue, bookings, and AI-scored leads",
+                     "Admin dashboard - desktop", "Revenue, best-sellers, and the lead-quality panel, ordered by AI score."),
+                    ("../assets/img/car-rental/admin-dashboard-mobile.png", "Admin dashboard on mobile",
+                     "Admin dashboard - mobile", "The same operational view, responsive for staff checking in from a phone."),
+                    ("../assets/img/car-rental/automation-hot-lead-execution.png", "n8n execution log for a lead scored and routed as hot",
+                     "n8n - hot lead execution", "A scored conversation routed as a hot lead, logged in the live n8n execution history."),
+                    ("../assets/img/car-rental/automation-cold-lead-execution.png", "n8n execution log for a lead scored and routed as cold",
+                     "n8n - cold lead execution", "The same workflow branching to the cold-lead path for a lower-scored conversation."),
+                    ("../assets/img/car-rental/automation-google-sheet-rows.png", "Rows appended to the Google Sheet by the n8n automation",
+                     "Google Sheet output", "The resulting rows - name, intent, score, and routing - appended automatically, no manual entry."),
+                ]))
     ),
 )
 

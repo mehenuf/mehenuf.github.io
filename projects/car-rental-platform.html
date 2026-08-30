@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BestCar - Full-Stack Car Rental Platform with AI Assistant - Md. Mehenuf Hossain Bhuiyan</title>
+<meta name="description" content="A car rental platform built for a Web Designer/Web Developer + AI Automation technical assessment: a booking flow, a live operational admin dashboard, role-gated access, and a grounded chat assistant feeding a working n8n lead automation - all on one real Supabase database.">
+<meta name="theme-color" content="#F5F6F8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0C0E15" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="BestCar - Full-Stack Car Rental Platform with AI Assistant - Md. Mehenuf Hossain Bhuiyan">
+<meta property="og:description" content="A car rental platform built for a Web Designer/Web Developer + AI Automation technical assessment: a booking flow, a live operational admin dashboard, role-gated access, and a grounded chat assistant feeding a working n8n lead automation - all on one real Supabase database.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mehenuf.github.io/projects/car-rental-platform.html">
+<meta property="og:image" content="https://mehenuf.github.io/assets/img/profile-mehenuf.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BestCar - Full-Stack Car Rental Platform with AI Assistant - Md. Mehenuf Hossain Bhuiyan">
+<meta name="twitter:description" content="A car rental platform built for a Web Designer/Web Developer + AI Automation technical assessment: a booking flow, a live operational admin dashboard, role-gated access, and a grounded chat assistant feeding a working n8n lead automation - all on one real Supabase database.">
+<meta name="twitter:image" content="https://mehenuf.github.io/assets/img/profile-mehenuf.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2312141C'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' fill='%23fff' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<script>
+(function(){
+  var d=document.documentElement; d.classList.add('js');
+  var s=null; try{ s=localStorage.getItem('theme'); }catch(e){}
+  var p=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+  d.setAttribute('data-theme', s||(p?'dark':'light'));
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=3">
+</head>
+<body>
+
+<a href="#top" class="skip-link">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="../index.html#top" class="brand"><span class="mark"><span>M</span></span> Mehenuf</a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#timeline">Timeline</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#work">Projects</a>
+      <a href="../index.html#leadership">Leadership</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="mailto:mehenuf@gmail.com?subject=R%C3%A9sum%C3%A9%20request%20-%20portfolio&body=Hi%20Mehenuf%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20a%20copy%20of%20your%20CV%2Fr%C3%A9sum%C3%A9.%0A%0AName%3A%0ACompany%2Forganisation%3A%0ARole%20or%20context%3A%0A%0AThanks%2C"><svg viewBox="0 0 24 24"><path d="M12 3v11m0 0-4-4m4 4 4-4M5 20h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Request résumé</a>
+      <button class="icon-btn theme-toggle" aria-label="Switch to dark theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="icon-btn nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top" tabindex="-1">
+  <section class="p-hero">
+    <div class="wrap">
+      <div data-stagger>
+        <a class="p-back" href="../index.html#work"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to projects</a>
+        <div class="kicker">Technical assessment · Web Designer/Web Developer + AI Automation role · Aug 2026</div>
+        <h1>Every number on the admin dashboard reads from a live database. None of it is sample data.</h1>
+        <p class="sub">A car rental platform built for a Web Designer/Web Developer + AI Automation technical assessment - a frictionless booking flow, a live operational dashboard for staff, role-gated admin access, and a chat assistant grounded in real inventory that feeds a working n8n lead automation, all running against one real Supabase database.</p>
+        <div class="p-tags"><span>Next.js 16</span><span>TypeScript</span><span>Supabase</span><span>Tailwind v4</span><span>n8n</span><span>Groq + Gemini</span></div>
+        <div class="p-cta-row">
+          <a class="btn btn-primary" href="https://car-rental-project-mehenuf.vercel.app/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View live site</a>
+          <a class="btn btn-ghost" href="https://github.com/mehenuf/car-rental-project" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.1.68-.22.68-.5 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.19-3.37-1.19-.46-1.2-1.11-1.53-1.11-1.53-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.79-4.58 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .28.18.61.69.5A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>View source</a><a class="btn btn-ghost" href="../index.html#contact">Ask me about this</a>
+        </div>
+      </div>
+      <div class="facts" data-stagger style="margin-top:44px;"><div class="fact"><div class="k">0</div><div class="v">Hard-coded numbers - every dashboard figure and vehicle listing is a live Supabase query</div></div><div class="fact"><div class="k">6</div><div class="v">Live views on one admin dashboard - revenue, best-sellers, sales by country, bookings, leads, inventory</div></div><div class="fact"><div class="k">17</div><div class="v">REST endpoints, every one validated with Zod before it touches the database</div></div><div class="fact"><div class="k">Groq → Gemini</div><div class="v">Two-provider fallback keeps the chat assistant answering through a provider outage</div></div></div>
+    </div>
+  </section>
+
+  <section class="p-section">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="kicker">The brief</div>
+        <h2>A rental site has three different people to satisfy, and each one breaks it in a different way.</h2>
+        <p class="p-lede">The assessment asked for a customer-facing rental site, an admin dashboard, and an AI feature backed by a working automation. Framing it around who actually uses each piece, rather than a feature checklist, is what shaped the build.</p>
+      </div>
+      <div class="p-block reveal"><ul><li><b>A customer deciding among rental sites won't tolerate a slow or confusing booking flow.</b> If they can't quickly see what's available, at what price, and how to reserve it, they leave for a competitor.</li><li><b>Staff need a live, current view of the fleet and bookings - not a spreadsheet.</b> Checking a raw database to answer 'how's revenue trending' or 'which bookings need attention today' doesn't scale past a handful of people.</li><li><b>A visitor with a question, not yet a decision, is the easiest lead to lose.</b> If answering 'is a bigger car available' takes an email or a phone call, most people leave instead of asking.</li></ul></div>
+
+    </div>
+  </section>
+  <section class="p-section">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="kicker">The approach</div>
+        <h2>One build per audience, all reading from the same database.</h2>
+        
+      </div>
+      <div class="pipeline" data-stagger>
+        <div class="pipe-step"><span class="pn">01</span><h4>Friction-free booking</h4><p>Searchable, filterable listings (category, price, seats, transmission, fuel), a detail page per vehicle, and a booking flow that never requires an account first - matching how people actually shop for a rental.</p></div>
+        <div class="pipe-step"><span class="pn">02</span><h4>A dashboard staff would actually use</h4><p>Live revenue against the prior period, a best-seller ranking, sales by country, a searchable bookings table with one-click status changes, and full vehicle inventory CRUD - reading from the same tables the customer site writes to.</p></div>
+        <div class="pipe-step"><span class="pn">03</span><h4>A chat assistant grounded in real inventory</h4><p>Live on every page, answering with specific real vehicles and prices pulled from the current fleet - with Gemini as an automatic fallback if the primary Groq call fails.</p></div>
+        <div class="pipe-step"><span class="pn">04</span><h4>Silent lead scoring</h4><p>Once a conversation reaches a few messages, it's scored in the background for booking likelihood, budget, and urgency, and surfaces on the dashboard ranked highest first - no one reads a transcript to find the serious buyers.</p></div>
+        <div class="pipe-step"><span class="pn">05</span><h4>Leads land where the team already looks</h4><p>An n8n workflow logs every scored lead to a Google Sheet the moment it's created, instead of asking a small sales team to adopt a new dashboard habit.</p></div>
+        <div class="pipe-step"><span class="pn">06</span><h4>Access checked on every request, not just the front door</h4><p>Customer and staff accounts share one login system; only a role check that runs on every request touching sensitive data - not only the dashboard page - can reach it.</p></div>
+      </div>
+
+    </div>
+  </section>
+  <section class="p-section">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="kicker">Results</div>
+        <h2>What's actually live - and what's honestly still a placeholder.</h2>
+        
+      </div>
+      <div class="finding-grid" data-stagger>
+        <div class="finding"><span class="tag">OPERATIONAL</span><div><h3>The dashboard reflects what's actually happening, not a snapshot</h3><p>Revenue, best-sellers, sales by country, bookings, and leads all read from the same Supabase tables the customer site writes to - there's no separate content layer to keep in sync or let go stale.</p></div></div>
+        <div class="finding"><span class="tag">GROUNDED</span><div><h3>The assistant only ever names cars that exist</h3><p>Every reply is generated with the live, available-vehicle list injected as the model's source of truth, and every picture-card recommendation is a real slug pulled from that same query - there's no path for it to invent a car, price, or feature.</p></div></div>
+        <div class="finding"><span class="tag">RESPONSIVE</span><div><h3>Built and tested at phone, tablet, and desktop, not just shrunk down</h3><p>Both the customer site and the admin dashboard adapt navigation, forms, and touch targets at each width - a meaningful share of visitors to a site like this are comparing options on a phone.</p></div></div>
+        <div class="finding"><span class="tag">HONEST LIMITS</span><div><h3>No real per-date availability check yet</h3><p>Vehicles carry a static <code>available</code> flag and a <code>stock</code> count, not a booking-conflict engine - two customers could request the same car for overlapping dates and both would land as <code>pending</code> for an admin to resolve manually. Flagged in the project's own write-up as the top next step, not discovered after the fact.</p></div></div>
+      </div>
+
+    </div>
+  </section>
+  <section class="p-section">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="kicker">From the app</div>
+        <h2>The customer site, the admin dashboard, and the automation it feeds.</h2>
+        
+      </div>
+      <div class="gallery">
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Homepage - desktop"><img src="../assets/img/car-rental/homepage-desktop.png" alt="BestCar homepage on desktop showing the vehicle inventory grid" width="3387" height="1320" loading="lazy" decoding="async"><figcaption><b>Homepage - desktop</b>The customer-facing inventory grid, filterable by category and price.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Homepage - mobile"><img src="../assets/img/car-rental/homepage-mobile.png" alt="BestCar homepage on mobile" width="1270" height="2270" loading="lazy" decoding="async"><figcaption><b>Homepage - mobile</b>The same inventory browsing experience, responsive down to mobile.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Chat assistant in use"><img src="../assets/img/car-rental/chat-widget.png" alt="The chat assistant recommending real vehicles with picture cards" width="390" height="611" loading="lazy" decoding="async"><figcaption><b>Chat assistant in use</b>A grounded recommendation - every card links to a real vehicle detail page.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Admin dashboard - desktop"><img src="../assets/img/car-rental/admin-dashboard-desktop.png" alt="Admin dashboard on desktop showing revenue, bookings, and AI-scored leads" width="3439" height="1439" loading="lazy" decoding="async"><figcaption><b>Admin dashboard - desktop</b>Revenue, best-sellers, and the lead-quality panel, ordered by AI score.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Admin dashboard - mobile"><img src="../assets/img/car-rental/admin-dashboard-mobile.png" alt="Admin dashboard on mobile" width="1258" height="2274" loading="lazy" decoding="async"><figcaption><b>Admin dashboard - mobile</b>The same operational view, responsive for staff checking in from a phone.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: n8n - hot lead execution"><img src="../assets/img/car-rental/automation-hot-lead-execution.png" alt="n8n execution log for a lead scored and routed as hot" width="3178" height="1264" loading="lazy" decoding="async"><figcaption><b>n8n - hot lead execution</b>A scored conversation routed as a hot lead, logged in the live n8n execution history.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: n8n - cold lead execution"><img src="../assets/img/car-rental/automation-cold-lead-execution.png" alt="n8n execution log for a lead scored and routed as cold" width="3170" height="1253" loading="lazy" decoding="async"><figcaption><b>n8n - cold lead execution</b>The same workflow branching to the cold-lead path for a lower-scored conversation.</figcaption></figure>
+        <figure class="shot reveal-img" tabindex="0" role="button" aria-label="Enlarge: Google Sheet output"><img src="../assets/img/car-rental/automation-google-sheet-rows.png" alt="Rows appended to the Google Sheet by the n8n automation" width="3394" height="1325" loading="lazy" decoding="async"><figcaption><b>Google Sheet output</b>The resulting rows - name, intent, score, and routing - appended automatically, no manual entry.</figcaption></figure>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="p-section">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="kicker">Built with</div>
+        <div class="chip-row"><span class="chip">Next.js 16</span><span class="chip">React 19</span><span class="chip">TypeScript</span><span class="chip">Supabase (Postgres + Auth)</span><span class="chip">Tailwind CSS v4</span><span class="chip">shadcn/ui</span><span class="chip">Zod</span><span class="chip">Groq</span><span class="chip">Gemini</span><span class="chip">n8n</span><span class="chip">Recharts</span></div>
+      </div>
+      <div class="p-nav">
+        <a href="flood-alert-system.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Flood Alert System</a>
+        <a href="../index.html#work">All projects</a>
+        <a href="cifar10-classifier.html">CIFAR-10 Classifier<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span class="foot-note">© <span data-year></span> Md. Mehenuf Hossain Bhuiyan</span>
+    <div class="footer-links">
+      <a href="https://github.com/mehenuf" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/mehenuf" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://scholar.google.com/citations?user=QUsIy4QAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+      <a href="mailto:mehenuf@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js?v=3"></script>
+</body>
+</html>
