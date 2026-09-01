@@ -241,7 +241,9 @@ html.js .reveal-img.in figcaption{ opacity:1; transition:opacity 320ms var(--eas
   .t-item.in .t-node::after{ transform:none !important; }
   .t-cursor{ display:none; }
   .eyebrow .dot{ animation:none; }
-  .btn:active, .proj-card:active, .shot:active, .icon-btn:active, .brand:active{ transform:none !important; }
+  .btn:active, .proj-card:active, .proj-row:active, .shot:active, .icon-btn:active, .brand:active{ transform:none !important; }
+  .proj-card:hover .proj-media img, .proj-row:hover .proj-row-media img,
+  .proj-card:hover .proj-media .glyph, .proj-row:hover .proj-row-media .glyph{ transform:none !important; }
   .lightbox-img{ transform:none !important; }
   .lightbox.open .lightbox-img{ transform:none !important; }
 }
