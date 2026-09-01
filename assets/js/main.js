@@ -42,6 +42,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ---------- Projects view toggle (grid / list) ---------- */
+  var viewBtns = document.querySelectorAll('.view-btn');
+  if (viewBtns.length) {
+    var currentView = root.getAttribute('data-proj-view') || 'grid';
+    viewBtns.forEach(function (btn) {
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-view') === currentView ? 'true' : 'false');
+      btn.addEventListener('click', function () {
+        var view = btn.getAttribute('data-view');
+        root.setAttribute('data-proj-view', view);
+        viewBtns.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+        try { localStorage.setItem('projectsView', view); } catch (e) { /* private mode */ }
+      });
+    });
+  }
+
   /* ---------- Nav: scrolled border + mobile menu ---------- */
   var nav = document.querySelector('.nav');
   var navToggle = document.querySelector('.nav-toggle');
