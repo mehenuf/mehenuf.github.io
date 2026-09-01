@@ -565,16 +565,15 @@ PAGES["perfume-store-rdbms.html"] = dict(
     headline="The schema is the product. The storefront is just how you look at it.",
     sub="A fully normalized MySQL database with PL/SQL stored procedures, automated triggers, and ACID-compliant transactions - with a complete PHP storefront and admin dashboard built on top.",
     tags=tags(["MySQL", "PL/SQL", "3NF", "Triggers", "ACID", "PHP", "JavaScript"]),
-    primary_cta=github_cta("https://github.com/mehenuf/cse311-perfume-store"),
-    repo="https://github.com/mehenuf/cse311-perfume-store",
-    extra_cta='<a class="btn btn-ghost" href="../index.html#contact">Ask me about this</a>',
+    primary_cta=f'<a class="btn btn-primary" href="https://perfumestore.kesug.com/" target="_blank" rel="noopener">{EXT}View Live (Revamp)</a>',
+    extra_cta=f'<a class="btn btn-ghost" href="#legacy-live" target="_blank" rel="noopener">{EXT}View Live (Legacy)</a> ' + github_cta("https://github.com/mehenuf/cse311-perfume-store-revamp").replace("View source on GitHub", "Source (Revamp)") + ' ' + github_cta("https://github.com/mehenuf/cse311-perfume-store").replace("View source on GitHub", "Source (Legacy)") + ' <a class="btn btn-ghost" href="../index.html#contact">Ask me about this</a>',
     facts=facts([
         ("3NF", "Third normal form across every table"),
         ("Zero", "Redundant data between product, supplier and inventory"),
         ("ACID", "Transaction-safe concurrent stock control"),
         ("Full-stack", "Storefront, cart, checkout, and admin dashboard"),
     ]),
-    stack=chips(["SQL", "MySQL", "PL/SQL", "PHP", "JavaScript", "jQuery", "Bootstrap", "HTML", "CSS"]),
+    stack=chips(["PHP 8", "MySQL", "PostgreSQL", "Vanilla JavaScript", "CSS", "HTML5"]),
     prev_href="corn-leaf-xai.html", prev_label="Corn Leaf XAI",
     next_href="flood-alert-system.html", next_label="Flood Alert System",
     body=(
@@ -609,10 +608,78 @@ PAGES["perfume-store-rdbms.html"] = dict(
                     ("PRODUCT", "A working store, not a diagram",
                      "Brand-filtered catalogue pages, cart and checkout flow, order history, and an admin dashboard covering active orders, inventory, and product management."),
                 ])) +
-        section("Note on assets",
-                "Screenshots to add.",
+        section("Database Schema",
+                "Entity-Relationship Diagram (ERD).",
+                "The core tables mapped out as an entity-relationship diagram, showing the relationships that drive the store.",
+                '      <div class="code-scroll reveal"><pre><code class="language-mermaid">' + html.escape("""erDiagram
+    customer ||--o{ cart : "fills"
+    customer ||--o{ orders : "places"
+    orders   ||--o{ order_item : "contains"
+    perfumes ||--o{ cart : "sits in"
+    perfumes ||--o{ order_item : "sold as"
+
+    customer {
+        int id PK
+        string username UK
+        string email UK
+        string password
+        string name
+        string contacts
+        string address
+        date dob
+        tinyint admin_check "1 = shop owner"
+    }
+    perfumes {
+        int id PK
+        string name UK
+        text perfume_notes
+        text description
+        string volume
+        int qty "stock"
+        string image_path
+        decimal price "in Taka"
+        tinyint trending "1 = on homepage"
+        tinyint status "1 = visible"
+    }
+    cart {
+        int id PK
+        int user_id FK
+        int perfume_id FK
+        int perfume_qty
+    }
+    orders {
+        int id PK
+        string tracking_no UK
+        int user_id FK
+        string name
+        string email
+        string address
+        string zipcode
+        decimal total_price
+        string payment_mode
+        tinyint status "0 to 4"
+        timestamp created_at
+    }
+    order_item {
+        int id PK
+        int order_id FK
+        int perfume_id FK
+        int perfume_qty
+        decimal price "price when bought"
+    }""") + '</code></pre></div>\n') +
+        section("Gallery",
+                "A look around the live application.",
                 "",
-                '      <p class="note reveal">This repository ships the application source rather than exported screenshots. Run it locally against MySQL and capture the storefront, cart, and admin dashboard into <code>assets/img/store/</code> - plus an export of the ERD - and they can be dropped into this page in the same gallery format used on the ML case studies.</p>\n')
+                gallery([
+                    ("../assets/img/store/collection.png", "The Collection Page", "The Collection", "Brand-filtered catalogue pages showing available fragrances."),
+                    ("../assets/img/store/product.png", "A Product Page", "Product Details", "Individual product view with scent notes and stock status."),
+                    ("../assets/img/store/cart.png", "The Cart", "Shopping Cart", "Persistent cart that calculates total price and manages quantities."),
+                    ("../assets/img/store/admin.png", "The Admin Panel", "Admin Dashboard", "A secure dashboard for managing inventory and order fulfillment."),
+                ])) +
+        """<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default' });
+</script>"""
     ),
 )
 
