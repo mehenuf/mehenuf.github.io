@@ -611,7 +611,7 @@ PAGES["perfume-store-rdbms.html"] = dict(
         section("Database Schema",
                 "Entity-Relationship Diagram (ERD).",
                 "The core tables mapped out as an entity-relationship diagram, showing the relationships that drive the store.",
-                '      <div class="code-scroll reveal"><pre><code class="language-mermaid">' + html.escape("""erDiagram
+                '      <div class="erd-wrap reveal"><pre class="mermaid">' + html.escape("""erDiagram
     customer ||--o{ cart : "fills"
     customer ||--o{ orders : "places"
     orders   ||--o{ order_item : "contains"
@@ -666,7 +666,7 @@ PAGES["perfume-store-rdbms.html"] = dict(
         int perfume_id FK
         int perfume_qty
         decimal price "price when bought"
-    }""") + '</code></pre></div>\n') +
+    }""") + '</pre></div>\n') +
         section("Gallery",
                 "A look around the live application.",
                 "",

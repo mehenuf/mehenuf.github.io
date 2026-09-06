@@ -128,7 +128,7 @@
         <h2>Entity-Relationship Diagram (ERD).</h2>
         <p class="p-lede">The core tables mapped out as an entity-relationship diagram, showing the relationships that drive the store.</p>
       </div>
-      <div class="code-scroll reveal"><pre><code class="language-mermaid">erDiagram
+      <div class="erd-wrap reveal"><pre class="mermaid">erDiagram
     customer ||--o{ cart : &quot;fills&quot;
     customer ||--o{ orders : &quot;places&quot;
     orders   ||--o{ order_item : &quot;contains&quot;
@@ -183,7 +183,7 @@
         int perfume_id FK
         int perfume_qty
         decimal price &quot;price when bought&quot;
-    }</code></pre></div>
+    }</pre></div>
 
     </div>
   </section>

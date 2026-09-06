@@ -859,6 +859,14 @@ html[data-proj-view="list"] .proj-view-list{ display:block; }
 .p-block li::before{ content:"→"; position:absolute; left:0; color:var(--teal-deep); font-weight:600; }
 .p-block li b{ color:var(--ink); font-weight:600; }
 
+.erd-wrap{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+  padding:28px; margin-top:24px; overflow-x:auto; -webkit-overflow-scrolling:touch;
+  display:flex; justify-content:center;
+}
+.erd-wrap pre.mermaid{ margin:0; background:transparent; }
+.erd-wrap svg{ max-width:100%; height:auto; }
+
 /* metrics table */
 .table-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; margin-top:24px; }
 .m-table{
